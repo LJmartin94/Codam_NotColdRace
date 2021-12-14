@@ -1,8 +1,10 @@
 #define ARRAY_SIZE 128
+#define QUERY_ARRAY_SIZE 128
 
 typedef struct s_pair {
     char *key;
     char *value;
+    int valueLength;
 }   t_pair;
 
 typedef struct s_link {
@@ -11,18 +13,38 @@ typedef struct s_link {
 }   t_link;
 
 typedef struct s_queryLink {
-    char    *value;
-    int     length;
-}
-s_pair array[];
+    t_pair *querySubArray[QUERY_ARRAY_SIZE];
+    struct s_queryLink *next;
+}   t_queryLink;
+
+typedef struct s_outputStr {
+    char    *str;
+    size_t  length;
+}   t_outputStr;
 
 
 Read input: stdin > char *inputStr
 
 Store key/values: char *inputStr > t_link **lst
 
-// Store queries  : char *str > t_Qlink **Qlst
+Store queries  : char *str > t_Qlink **Qlst
 
 Resolve queries: t_link **lst > char *outputStr;
 
 Print output: char *outputStr > stdout
+
+void storeInput(inputStr, lst)
+
+int main(void)
+{
+    char        **inputStr;
+    t_link      **keyLst;
+    t_queryLink **queryLst;
+    t_outputStr output;
+
+    readInput(inputStr);
+    storeKeyValues(inputStr, keyLst);
+    storeQueries(inputStr, queryLst);
+    resolveQueries(queryLst, &output);
+    printOutput(&output);
+}
