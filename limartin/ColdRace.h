@@ -1,5 +1,5 @@
 # ifndef ARRAY_SIZE
-#  define ARRAY_SIZE 1
+#  define ARRAY_SIZE 2
 # endif
 
 typedef struct s_pair {
@@ -9,7 +9,7 @@ typedef struct s_pair {
 }   t_pair;
 
 typedef struct s_link {
-    t_pair *subArray[ARRAY_SIZE];
+    t_pair **subArray;
     struct s_link *next;
 }   t_link;
 
