@@ -1,10 +1,12 @@
+#define ARRAY_SIZE 128
+
 typedef struct s_pair {
     char *key;
     char *value;
 }   t_pair;
 
 typedef struct s_link {
-    t_pair subArray[128];
+    t_pair subArray[ARRAY_SIZE];
     struct s_link *next;
 }   t_link;
 
