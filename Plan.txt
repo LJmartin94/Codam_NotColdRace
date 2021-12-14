@@ -1,0 +1,26 @@
+typedef struct s_pair {
+    char *key;
+    char *value;
+}   t_pair;
+
+typedef struct s_link {
+    t_pair subArray[128];
+    struct s_link *next;
+}   t_link;
+
+typedef struct s_queryLink {
+    char    *value;
+    int     length;
+}
+s_pair array[];
+
+
+Read input: stdin > char *inputStr
+
+Store key/values: char *inputStr > t_link **lst
+
+// Store queries  : char *str > t_Qlink **Qlst
+
+Resolve queries: t_link **lst > char *outputStr;
+
+Print output: char *outputStr > stdout
