@@ -199,21 +199,95 @@ void ht_dump(ht_t *hashtable) {
     }
 }
 
+typedef struct s_substr
+{
+    char *str;
+    size_t len;
+    struct s_substr *next;
+}   t_substr;
+
+
+t_substr *lst_add(char *str, size_t len)
+{
+    t_substr *link;
+
+    link = malloc(sizeof(t_substr));
+    if (!link)
+        return NULL;
+    link->str = str;
+    link->len = len;
+    return (link);
+}
+
+size_t ft_strlennn(char *str)
+{
+    size_t i = 0;
+
+    while (str[i])
+        i++;
+    return(i);
+}
+
+void writeOutput(t_substr *root, size_t strLen)
+{
+    char *output;
+    t_substr *link;
+    size_t outputIndex = 0;
+    size_t substringIndex;
+
+    output = malloc(sizeof(char) * (strLen + 1));
+    if (!output)
+        return;
+    link = root;
+    while (link)
+    {
+        substringIndex = 0;
+        while (substringIndex < link->len)
+        {
+            output[outputIndex + substringIndex] = link->str[substringIndex];
+            substringIndex++;
+        }
+        outputIndex += substringIndex;
+        link = link->next;
+    }
+    write(1, output, strLen);
+}
+
 void resolve_queries(ht_t *ht)
 {
     char *value;
     char *line = 0;
+    t_substr root;
+    t_substr *link;
+    char nl[] = "\n";
+    char notfound[] = ": Not found.\n";
+    size_t strLen = 0;
 
+    link = &root;
     while (get_next_line(0, &line))
     {
         if (strcmp("", line) == 0)
             break;
         value = ht_get(ht, line);
         if (value == NULL)
-            printf("%s: Not found.\n", line);
+        {
+            link->next = lst_add(line, ft_strlennn(line));
+            link = link->next;
+            link->next = lst_add(notfound, 13);
+            link = link->next;
+            strLen += ft_strlennn(line) + 13;
+        }
         else
-            printf("%s\n", value);
+        {
+            link->next = lst_add(value, ft_strlennn(value));
+            link = link->next;
+            link->next = lst_add(nl, 1);
+            link = link->next;
+            strLen += ft_strlennn(value) + 1;
+        }
     }
+    link->next = NULL;
+    writeOutput((root.next), strLen);
 }
 
 int main(void) {
