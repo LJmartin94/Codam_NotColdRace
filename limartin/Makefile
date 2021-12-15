@@ -6,7 +6,7 @@
 #    By: limartin <limartin@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/12/15 08:21:27 by limartin      #+#    #+#                  #
-#    Updated: 2021/12/15 09:17:53 by limartin      ########   odam.nl          #
+#    Updated: 2021/12/15 10:37:59 by limartin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ HEADER_FILES = $(INCL_PATH)
 #Source files mandatory part
 SRC = $(SRC_PATH)main.c \
 	$(SRC_PATH)store_kvps.c \
+	$(SRC_PATH)hashtable.c \
 	$(SRC_PATH)$(UTILS)get_next_line.c \
 	$(SRC_PATH)$(UTILS)get_next_line_utils.c \
 	$(SRC_PATH)$(UTILS)general_utils.c \

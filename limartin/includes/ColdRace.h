@@ -21,7 +21,7 @@ typedef struct s_pair
     char *value;
 	int keyLength;
     int valueLength;
-	struct t_pair *next;
+	struct s_pair *next;
 }   t_pair;
 
 typedef struct s_link 
@@ -40,3 +40,5 @@ int ft_strlen(const char *str);
 int	are_strs_eq(const char *s1, const char *s2);
 t_link *ft_get_kvps(int *kvps_total);
 t_ht *hash_table_create(void);
+void ht_insert(t_ht *table, const char *key, const char *value, int keylen, int vallen);
+void ht_visualise(t_ht *hashtable);
