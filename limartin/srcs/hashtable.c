@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/15 09:36:54 by limartin      #+#    #+#                 */
-/*   Updated: 2021/12/15 11:39:10 by limartin      ########   odam.nl         */
+/*   Updated: 2021/12/15 12:12:55 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ unsigned int ft_hash(const char *key)
 	return (value);
 }
 
+// Djb2 hash function
+unsigned long Djb2_hash(char *str) 
+{
+        unsigned long hash = 5381;
+        int c;
+        while ((c = *str++))
+            hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+        return hash % TABLE_SIZE;
+}
+
 // function to create the hashtable
 t_ht *hash_table_create(void)
 {
@@ -46,7 +56,7 @@ t_ht *hash_table_create(void)
 }
 
 // function to make & populate new kvp
-t_pair *ht_pair(const char *key, const char *value, int keylen, int vallen)
+t_pair *ht_pair(char *key, char *value, int keylen, int vallen)
 {
 	t_pair *entry = (t_pair *)malloc(sizeof(t_pair) * 1);
 	
@@ -60,9 +70,9 @@ t_pair *ht_pair(const char *key, const char *value, int keylen, int vallen)
 
 
 // function to insert kvp into hashtable
-void ht_insert(t_ht *table, const char *key, const char *value, int keylen, int vallen)
+void ht_insert(t_ht *table, char *key, char *value, int keylen, int vallen)
 {
-	unsigned int row = ft_hash(key);
+	unsigned int row = Djb2_hash(key);
 	t_pair *entry = table->entries[row];
 
 	if (entry == NULL)
@@ -91,9 +101,9 @@ void ht_insert(t_ht *table, const char *key, const char *value, int keylen, int 
 }
 
 // function to look up value by key
-char *ht_retrieve(t_ht *table, const char *key, int *val_len)
+char *ht_retrieve(t_ht *table, char *key, int *val_len)
 {
-	unsigned int row = ft_hash(key);
+	unsigned int row = Djb2_hash(key);
 	t_pair *entry = table->entries[row];
 
 	*val_len = 0;
