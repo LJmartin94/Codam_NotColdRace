@@ -6,48 +6,36 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/14 20:08:00 by limartin      #+#    #+#                 */
-/*   Updated: 2021/12/15 10:45:46 by limartin      ########   odam.nl         */
+/*   Updated: 2021/12/15 11:18:45 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ColdRace.h"
 
-int write_values(t_link *head, int kvps)
+int write_values(t_ht *ht)
 {
 	int ret = 1;
-	int i = 0;
-	int j = 0;
-	char *query;
-	t_link *array_link = head;
+	char *query_key;
+	char *query_value;
+	int query_len = 0;
+	int val_len = 0;
 
 	while(ret)
 	{
-		ret = get_next_line(0, &query);
-		if (ft_strlen(query) == 0)
+		ret = get_next_line(0, &query_key);
+		query_len = ft_strlen(query_key);
+		if (query_len == 0)
 			break;
-		i = 0;
-		j = 0;
-		array_link = head;
-		while (j < kvps)
+		query_value = ht_retrieve(ht, query_key, &val_len);
+		if (query_value == NULL)
 		{
-			if (are_strs_eq(query, ((array_link->subArray)[i])->key))
-			{
-				write(1, ((array_link->subArray)[i])->value, ((array_link->subArray)[i])->valueLength);
-				write(1, "\n", 1);
-				break;
-			}
-			i++;
-			if (i % ARRAY_SIZE == 0)
-			{
-				array_link = array_link->next;
-				i = 0;
-			}
-			j++;
-		}
-		if (j == kvps)
-		{
-			write(1, query, ft_strlen(query));
+			write(1, query_key, query_len);
 			write(1, ": Not found.\n", 13);
+		}
+		else
+		{
+			write(1, query_value, val_len);
+			write(1, "\n", 1);
 		}
 	}
 	return (0);
@@ -55,12 +43,11 @@ int write_values(t_link *head, int kvps)
 
 int main(void)
 {
-	int kvps = 0;
 	t_ht *ht = hash_table_create();
 
 	// ht_insert(ht, "key", "value", 3, 5);
 	// ht_visualise(ht);
-	t_link *list_array_kvp = ft_get_kvps(&kvps);
-	write_values(list_array_kvp, kvps);
+	ft_set_kvps(ht);
+	write_values(ht);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/15 09:36:54 by limartin      #+#    #+#                 */
-/*   Updated: 2021/12/15 10:42:41 by limartin      ########   odam.nl         */
+/*   Updated: 2021/12/15 11:13:03 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,21 @@ void ht_insert(t_ht *table, const char *key, const char *value, int keylen, int 
 }
 
 // function to look up value by key
-char *ht_retrieve(t_ht *table, const char *key)
+char *ht_retrieve(t_ht *table, const char *key, int *val_len)
 {
 	unsigned int row = ft_hash(key);
 	t_pair *entry = table->entries[row];
 
+	*val_len = 0;
 	if (entry == NULL)
 		return (NULL);
 	while (entry != NULL)
 	{
 		if (are_strs_eq(entry->key, key))
+		{
+			*val_len = entry->valueLength;
 			return (entry->value);
+		}
 		entry = entry->next;
 	}
 	return (NULL);
