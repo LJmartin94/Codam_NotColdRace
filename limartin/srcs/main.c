@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/14 20:08:00 by limartin      #+#    #+#                 */
-/*   Updated: 2021/12/15 09:19:17 by limartin      ########   odam.nl         */
+/*   Updated: 2021/12/15 09:36:38 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int write_values(t_link *head, int kvps)
 int main(void)
 {
 	int kvps = 0;
+	t_ht *ht = hash_table_create();
 
 	t_link *list_array_kvp = ft_get_kvps(&kvps);
 	write_values(list_array_kvp, kvps);
