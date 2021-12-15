@@ -40,3 +40,4 @@ void ht_insert(t_ht *table, char *key, char *value, int keylen, int vallen);
 void ht_visualise(t_ht *hashtable);
 char *ht_retrieve(t_ht *table, char *key, int *val_len);
 void resolve_queries(t_ht *ht);
+int hybrid_write_values(t_ht *ht);

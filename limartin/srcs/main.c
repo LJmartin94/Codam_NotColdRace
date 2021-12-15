@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/14 20:08:00 by limartin      #+#    #+#                 */
-/*   Updated: 2021/12/15 12:55:57 by limartin      ########   odam.nl         */
+/*   Updated: 2021/12/15 13:17:57 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int main(void)
 	// ht_visualise(ht);
 	ft_set_kvps(ht);
 	// write_values(ht);
-	resolve_queries(ht);
+	// resolve_queries(ht);
+	hybrid_write_values(ht);
 	return (0);
 }

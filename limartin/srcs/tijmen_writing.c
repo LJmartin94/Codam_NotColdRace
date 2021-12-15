@@ -106,3 +106,47 @@ void resolve_queries(t_ht *ht)
     link->next = NULL;
     writeOutput((root.next), strLen);
 }
+
+int hybrid_write_values(t_ht *ht)
+{
+	int ret = 1;
+	char *query_key;
+	char *query_value;
+	int query_len = 0;
+	int val_len = 0;
+    char nl[] = "\n";
+    char notfound[] = ": Not found.\n";
+    int strLen = 0;
+    t_substr root;
+    t_substr *link;
+	link = &root;
+
+	while(ret)
+	{
+		ret = get_next_line(0, &query_key);
+		query_len = ft_strlen(query_key);
+		if (query_len == 0)
+			break;
+
+        query_value = ht_retrieve(ht, query_key, &val_len);
+        if (query_value == NULL)
+        {
+            link->next = lst_add(query_key, query_len);
+            link = link->next;
+            link->next = lst_add(notfound, 13);
+            link = link->next;
+            strLen += query_len + 13;
+        }
+        else
+        {
+            link->next = lst_add(query_value, val_len);
+            link = link->next;
+            link->next = lst_add(nl, 1);
+            link = link->next;
+            strLen += val_len + 1;
+        }
+	}
+	link->next = NULL;
+    writeOutput((root.next), strLen);
+	return (0);
+}
