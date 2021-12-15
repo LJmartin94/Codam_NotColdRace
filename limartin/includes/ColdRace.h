@@ -7,7 +7,7 @@
 // DEFINES
 
 #ifndef TABLE_SIZE
-# define TABLE_SIZE 100000
+# define TABLE_SIZE 20000
 #endif
 
 // STRUCTS
@@ -39,3 +39,4 @@ t_ht *hash_table_create(void);
 void ht_insert(t_ht *table, char *key, char *value, int keylen, int vallen);
 void ht_visualise(t_ht *hashtable);
 char *ht_retrieve(t_ht *table, char *key, int *val_len);
+void resolve_queries(t_ht *ht);
