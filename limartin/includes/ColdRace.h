@@ -1,7 +1,16 @@
+// INCLUDES
+#include <unistd.h>
+#include <stdlib.h>
+#include <stddef.h>
+#include "get_next_line.h"
+
+// DEFINES
+
 # ifndef ARRAY_SIZE
 #  define ARRAY_SIZE 2
 # endif
 
+// STRUCTS
 typedef struct s_pair {
     char *key;
     char *value;
@@ -13,5 +22,7 @@ typedef struct s_link {
     struct s_link *next;
 }   t_link;
 
-#include <unistd.h>
-#include <stdlib.h>
+// PROTOTYPES
+int ft_strlen(const char *str);
+int	are_strs_eq(const char *s1, const char *s2);
+t_link *ft_get_kvps(int *kvps_total);
