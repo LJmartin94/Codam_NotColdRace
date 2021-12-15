@@ -6,10 +6,6 @@
 
 // DEFINES
 
-# ifndef ARRAY_SIZE
-#  define ARRAY_SIZE 2
-# endif
-
 #ifndef TABLE_SIZE
 # define TABLE_SIZE 100000
 #endif

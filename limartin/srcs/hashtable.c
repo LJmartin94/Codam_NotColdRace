@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/15 09:36:54 by limartin      #+#    #+#                 */
-/*   Updated: 2021/12/15 11:13:03 by limartin      ########   odam.nl         */
+/*   Updated: 2021/12/15 11:39:10 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,8 @@ t_pair *ht_pair(const char *key, const char *value, int keylen, int vallen)
 {
 	t_pair *entry = (t_pair *)malloc(sizeof(t_pair) * 1);
 	
-	int i = 0;
-	entry->key = (char *)malloc(keylen + 1);
-	while (i <= keylen)
-	{
-		entry->key[i] = key[i];
-		i++;
-	}
-	
-	i = 0;
-	entry->value = (char *)malloc(vallen + 1);
-	while (i <= vallen)
-	{
-		entry->value[i] = value[i];
-		i++;
-	}
+	entry->key = key;
+	entry->value = value;
 	entry->keyLength = keylen;
 	entry->valueLength = vallen;
 	entry->next = NULL;
