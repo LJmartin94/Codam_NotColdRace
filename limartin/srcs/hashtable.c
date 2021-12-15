@@ -6,7 +6,7 @@
 /*   By: limartin <limartin@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2021/12/15 09:36:54 by limartin      #+#    #+#                 */
-/*   Updated: 2021/12/15 11:39:10 by limartin      ########   odam.nl         */
+/*   Updated: 2021/12/15 11:52:57 by limartin      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_ht *hash_table_create(void)
 }
 
 // function to make & populate new kvp
-t_pair *ht_pair(const char *key, const char *value, int keylen, int vallen)
+t_pair *ht_pair(char *key, char *value, int keylen, int vallen)
 {
 	t_pair *entry = (t_pair *)malloc(sizeof(t_pair) * 1);
 	
@@ -60,7 +60,7 @@ t_pair *ht_pair(const char *key, const char *value, int keylen, int vallen)
 
 
 // function to insert kvp into hashtable
-void ht_insert(t_ht *table, const char *key, const char *value, int keylen, int vallen)
+void ht_insert(t_ht *table, char *key, char *value, int keylen, int vallen)
 {
 	unsigned int row = ft_hash(key);
 	t_pair *entry = table->entries[row];

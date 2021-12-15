@@ -36,6 +36,6 @@ int ft_strlen(const char *str);
 int	are_strs_eq(const char *s1, const char *s2);
 int ft_set_kvps(t_ht *ht);
 t_ht *hash_table_create(void);
-void ht_insert(t_ht *table, const char *key, const char *value, int keylen, int vallen);
+void ht_insert(t_ht *table, char *key, char *value, int keylen, int vallen);
 void ht_visualise(t_ht *hashtable);
 char *ht_retrieve(t_ht *table, const char *key, int *val_len);
